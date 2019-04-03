@@ -23,12 +23,12 @@ contract Inheritance {
         _;
     }
 
-    address[] wallets;
+    address payable[] wallets;
     mapping (address => uint) inheritance;
 
     // functions that define contract execution
         // a) set up receiving wallet(s)
-    function setup(address _wallet, uint _inheritanceAmount) public isOwner {
+    function setup(address payable _wallet, uint _inheritanceAmount) public isOwner {
         wallets.push(_wallet);
         inheritance[_wallet] = _inheritanceAmount;
     }
@@ -36,7 +36,7 @@ contract Inheritance {
         // b) pay all eligible wallets 
     function pay() private isDeceased {
         for (uint index = 0; index < wallets.length; index++) {
-            wallets[index].transfer(inheritance[wallets[i]]);
+            wallets[index].transfer(inheritance[wallets[index]]);
         }
     }
 
